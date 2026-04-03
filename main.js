@@ -6,11 +6,12 @@ if (navigator.geolocation) {
     alert("Geolocation is not supported by this browser.");
 }
 
-function success(position) {
+async function success(position) {
     console.log(position.coords.latitude);
     console.log(position.coords.longitude);
-     var result= fetch("https://api.open-meteo.com/v1/forecast?latitude="+position.coords.latitude+"&longitude="+position.coords.longitude+"&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&hourly=temperature_2m&current=temperature_2m,is_day&timezone=auto&forecast_days=1")
-     colsole.log(result);
+    var result= await fetch("https://api.open-meteo.com/v1/forecast?latitude="+position.coords.latitude+"&longitude="+position.coords.longitude+"&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&hourly=temperature_2m&current=temperature_2m,is_day&timezone=auto&forecast_days=1")
+    var data= await result.json(); 
+    console.log(data);
 }
 
 function error() {
